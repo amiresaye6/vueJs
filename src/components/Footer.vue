@@ -1,25 +1,23 @@
 <script setup>
+import trackMount from '@/utils/mountTracker';
+
+defineProps({
+    links: {
+        type: Array,
+        default: () => []
+    }
+})
+
+trackMount("footer component");
 
 </script>
 
 <template>
-    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
-        <nav>
-            <h6 class="footer-title">Services</h6>
-            <a class="link link-hover">Branding</a>
-            <a class="link link-hover">Design</a>
-            <a class="link link-hover">Marketing</a>
-            <a class="link link-hover">Advertisement</a>
+    <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+        <nav class="grid grid-flow-col gap-4">
+            <RouterLink v-for="link in links" :key="link.id" :to="link.href" class="link link-hover">{{link?.label}}</RouterLink>
         </nav>
         <nav>
-            <h6 class="footer-title">Company</h6>
-            <a class="link link-hover">About us</a>
-            <a class="link link-hover">Contact</a>
-            <a class="link link-hover">Jobs</a>
-            <a class="link link-hover">Press kit</a>
-        </nav>
-        <nav>
-            <h6 class="footer-title">Social</h6>
             <div class="grid grid-flow-col gap-4">
                 <a>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -47,6 +45,9 @@
                 </a>
             </div>
         </nav>
+        <aside>
+            <p>Copyright © {{new Date().getFullYear()}} - All right reserved by Amir Team</p>
+        </aside>
     </footer>
 
 </template>
