@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import BreadCrumps from './BreadCrumps.vue';
 import trackMount from '@/utils/mountTracker';
+import { useProductsStore } from '@/store/products.store';
 
 const props = defineProps({
     product: {
@@ -18,13 +19,9 @@ const props = defineProps({
 
 trackMount("product detaisl");
 
+const productsStore = useProductsStore();
 
-const emit = defineEmits(["buy"]);
-
-const buyClickHandler = (id) => {
-    console.log(`user is buying product ${id}`);
-    emit('buy', id);
-}
+const {isLoading, isError, buyProduct} = productsStore;
 
 const inStock = computed(() => props.product.stock > 0);
 
@@ -92,7 +89,7 @@ const links = ref([
                 </div>
                 <div class="pt-4">
                     <button class="btn btn-primary w-full md:w-auto" :disabled="!inStock"
-                        @click="buyClickHandler(product.id)">
+                        @click="buyProduct(product.id)">
                         Buy Now
                     </button>
                 </div>
