@@ -3,6 +3,8 @@ import { computed, ref } from 'vue';
 import BreadCrumps from './BreadCrumps.vue';
 import trackMount from '@/utils/mountTracker';
 import { useProductsStore } from '@/store/products.store';
+import { useCartStore } from '@/store/cart.store';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps({
     product: {
@@ -20,8 +22,10 @@ const props = defineProps({
 trackMount("product detaisl");
 
 const productsStore = useProductsStore();
+const cartStore = useCartStore();
 
-const {isLoading, isError, buyProduct} = productsStore;
+const { buyProduct } = productsStore;
+const { addToCart } = cartStore;
 
 const inStock = computed(() => props.product.stock > 0);
 
@@ -87,10 +91,14 @@ const links = ref([
                         }}
                     </span>
                 </div>
-                <div class="pt-4">
+                <div class="pt-4 flex gap-2 flex-wrap">
                     <button class="btn btn-primary w-full md:w-auto" :disabled="!inStock"
                         @click="buyProduct(product.id)">
                         Buy Now
+                    </button>
+                    <button class="btn btn-secondary w-full md:w-auto" :disabled="!inStock"
+                        @click="addToCart(product)">
+                        Add To Cart
                     </button>
                 </div>
             </div>

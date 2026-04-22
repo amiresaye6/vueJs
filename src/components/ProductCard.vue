@@ -24,7 +24,7 @@ trackMount("product card");
 </script>
 
 <template>
-    <div class="card bg-base-300  shadow-sm h-full">
+    <div class="card bg-base-100  shadow-sm h-full">
         <figure class="aspect-square overflow-hidden ">
             <img class="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
                 :src="prod.image" />

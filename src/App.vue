@@ -1,20 +1,16 @@
 <script setup>
-import { computed, ref } from 'vue';
 import Footer from './components/Footer.vue';
 import NavBar from './components/NavBar.vue';
-
-// const decreaseStock = (id) => {
-//   const product = products.value.find((p) => p.id === id);
-//   product.stock -= 1;
-//   console.log('decrease by one' + product.stock);
-// }
+import { Toaster } from 'vue-sonner'
+import 'vue-sonner/style.css'
 
 const brand = "Amir";
 
 const navLinks = [
   { id: 1, label: "Home", href: "/", },
-  { id: 2, label: "Product", href: "/product/101", },
+  { id: 2, label: "Perfumes", href: "/product/101", },
   { id: 3, label: "About", href: "/about", },
+  { id: 4, label: "Cart", href: "/cart", },
 ]
 
 const footerLinks = [
@@ -28,6 +24,7 @@ const footerLinks = [
 </script>
 
 <template>
+  <Toaster richColors  />
   <NavBar :brand="brand" :links="navLinks" />
 
   <main class="p-8">
